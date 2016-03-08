@@ -2,7 +2,7 @@
 
 __global__ void VecAdd(float * A, float * B, float * C)
 {
-    int i = threadIdx.x;
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
     C[i] = A[i] + B[i];
 }
 
@@ -35,8 +35,8 @@ int main()
     // Initialize input vectors
     for (int i=0; i<N; i++)
     {
-        h_A[i] = 2*i;
-        h_B[i] = 4*i;
+        h_A[i] = 2*i+1;
+        h_B[i] = 4*i+1;
         h_C[i] = 0;
     }
 
@@ -58,7 +58,9 @@ int main()
     cudaMemcpy(d_B, h_B, size, cudaMemcpyHostToDevice);
 
     // Run the add kernel
-    VecAdd<<<1, N>>>(d_A, d_B, d_C);
+    int blocks = 3;
+    int threads_per_block = N/blocks;
+    VecAdd<<<blocks, threads_per_block>>>(d_A, d_B, d_C);
 
     // Print result
     cudaMemcpy(h_C, d_C, size, cudaMemcpyDeviceToHost);
