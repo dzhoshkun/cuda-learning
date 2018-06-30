@@ -16,7 +16,7 @@ void add(int n, float *x, float *y)
     y[i] = x[i] + y[i];
 }
 
-int main(void)
+int main(int argc, char * argv[])
 {
   int N = 1<<20;
   float *x, *y;
@@ -32,7 +32,7 @@ int main(void)
   }
 
   // Run kernel on 1M elements on the GPU
-  int blockSize = 256;
+  int blockSize = atoi(argv[1]);
   int numBlocks = (N + blockSize - 1) / blockSize;
   add<<<numBlocks, blockSize>>>(N, x, y);
 
