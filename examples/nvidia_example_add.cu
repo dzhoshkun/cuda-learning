@@ -17,6 +17,15 @@ void add_1_thread(int n, float *x, float *y)
 }
 
 __global__
+void add_1_block(int n, float *x, float *y)
+{
+  int index = threadIdx.x;
+  int stride = blockDim.x;
+  for (int i = index; i < n; i += stride)
+    y[i] = x[i] + y[i];
+}
+
+__global__
 void add_grid(int n, float *x, float *y)
 {
   int index = blockIdx.x * blockDim.x + threadIdx.x;
@@ -48,6 +57,7 @@ int main(int argc, char * argv[])
     printf("%d elements can't be processed by %d threads!\n",
            N, numThreads);
   add_grid<<<numBlocks, blockSize>>>(N, x, y);
+  add_1_block<<<1, blockSize>>>(N, x, y);
   add_1_thread<<<1, 1>>>(N, x, y);
 
   // Wait for GPU to finish before accessing on host
