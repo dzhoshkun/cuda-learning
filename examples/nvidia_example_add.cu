@@ -8,6 +8,14 @@
 #include <math.h>
 #include <stdio.h>
 // Kernel function to add the elements of two arrays
+
+__global__
+void add_1_thread(int n, float *x, float *y)
+{
+  for (int i = 0; i < n; i++)
+    y[i] = x[i] + y[i];
+}
+
 __global__
 void add_grid(int n, float *x, float *y)
 {
@@ -40,15 +48,10 @@ int main(int argc, char * argv[])
     printf("%d elements can't be processed by %d threads!\n",
            N, numThreads);
   add_grid<<<numBlocks, blockSize>>>(N, x, y);
+  add_1_thread<<<1, 1>>>(N, x, y);
 
   // Wait for GPU to finish before accessing on host
   cudaDeviceSynchronize();
-
-  // Check for errors (all values should be 3.0f)
-  float maxError = 0.0f;
-  for (int i = 0; i < N; i++)
-    maxError = fmax(maxError, fabs(y[i]-3.0f));
-  std::cout << "Max error: " << maxError << std::endl;
 
   // Free memory
   cudaFree(x);
