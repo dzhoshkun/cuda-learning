@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <math.h>
+#include <stdio.h>
 // Kernel function to add the elements of two arrays
 __global__
 void add(int n, float *x, float *y)
@@ -34,6 +35,10 @@ int main(int argc, char * argv[])
   // Run kernel on 1M elements on the GPU
   int blockSize = atoi(argv[2]);
   int numBlocks = atoi(argv[1]);
+  int numThreads = numBlocks * blockSize;
+  if (numThreads != N)
+    printf("%d elements can't be processed by %d threads!\n",
+           N, numThreads);
   add<<<numBlocks, blockSize>>>(N, x, y);
 
   // Wait for GPU to finish before accessing on host
