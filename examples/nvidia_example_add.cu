@@ -32,8 +32,8 @@ int main(int argc, char * argv[])
   }
 
   // Run kernel on 1M elements on the GPU
-  int blockSize = atoi(argv[1]);
-  int numBlocks = (N + blockSize - 1) / blockSize;
+  int blockSize = atoi(argv[2]);
+  int numBlocks = atoi(argv[1]);
   add<<<numBlocks, blockSize>>>(N, x, y);
 
   // Wait for GPU to finish before accessing on host
