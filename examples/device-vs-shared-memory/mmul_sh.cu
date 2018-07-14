@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 // Matrices are stored in row-major order:
 // M(row, col) = *(M.elements + row * M.stride + col)
 typedef struct {
@@ -137,5 +139,45 @@ void MatMul(const Matrix A, const Matrix B, Matrix C)
     // Write Csub to device memory
     // Each thread writes one element
     SetElement(Csub, row, col, Cvalue);
+}
+
+int main(int argc, char * argv[])
+{
+    if (argc < 3)
+    {
+        printf("Usage: %s <width> <height>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    Matrix A, B, C;
+
+    A.width = atoi(argv[1]);
+    A.height = atoi(argv[2]);
+    A.elements = (float *) malloc(A.width * A.height * sizeof(float));
+    for (int i = 0; i < A.width; i++)
+        for (int j = 0; j < A.height; j++)
+            A.elements[j * A.width + i] = j + i;
+
+    B.width = A.height;
+    B.height = A.width;
+    B.elements = (float *) malloc(B.width * B.height * sizeof(float));
+    for (int i = 0; i < B.width; i++)
+        for (int j = 0; j < B.height; j++)
+            B.elements[j * B.width + i] = j + i;
+
+    printf("Multiplying %dx%d matrix with %dx%d matrix\n",
+           A.width, A.height, B.width, B.height);
+
+    C.width = B.width;
+    C.height = A.height;
+    C.elements = (float *) malloc(C.width * C.height * sizeof(float));
+
+    MatMul(A, B, C);
+
+    delete [] A.elements;
+    delete [] B.elements;
+    delete [] C.elements;
+
+    return EXIT_SUCCESS;
 }
 
