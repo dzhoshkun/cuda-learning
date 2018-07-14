@@ -20,6 +20,6 @@ Using the NVIDIA profiler to measure the execution times, e.g. `CUDA_VISIBLE_DEV
 
 | GPU | 16x16 | 64x64 | 256x256 | 1024x1024 | 4096x4096 |
 | --- | --- |--- |--- |--- |--- |
-| NVIDIA 12GB GTX TITAN X: | | | | | |
-| NVIDIA 6GB Zotac GTX 980 Ti: | | | | | |
+| NVIDIA 12GB GTX TITAN X: | 3.1360us | 6.8480us | 120.90us | 8.1919ms | 527.85ms |
+| NVIDIA 6GB Zotac GTX 980 Ti: | 3.1680us | 6.8800us | 122.75us | 8.1834ms | 528.07ms |
 
