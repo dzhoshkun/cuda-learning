@@ -1,8 +1,7 @@
 ## Device memory vs Shared memory
 
-This example compares the performance of matrix multiplication performed [on device memory][mmul-dev] vs [on shared memory][mmul-sh].
+This example compares the performance of matrix multiplication performed [on device memory vs on shared memory][mmul-sh].
 
-[mmul-dev]: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#device-memory
 [mmul-sh]: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#shared-memory
 
 ### System
