@@ -1,3 +1,7 @@
+/* Matrix multiplication using device memory, adapted from:
+ * https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#shared-memory
+ */
+
 // Matrices are stored in row-major order:
 // M(row, col) = *(M.elements + row * M.width + col)
 typedef struct {
