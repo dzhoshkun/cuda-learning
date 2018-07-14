@@ -12,10 +12,14 @@ This example compares the performance of matrix multiplication performed [on dev
 * CUDA version: 9.0.176
 * NVIDIA driver version: 384.111
 
+### Method
+
+Using the NVIDIA profiler to measure the execution times, e.g. `CUDA_VISIBLE_DEVICES=0 nvprof build/mmul_dev 1024 1024`
+
 ### Results
 
-| GPU | Runtime (ms) |
-| --- | --- |
-| NVIDIA 12GB GTX TITAN X: | |
-| NVIDIA 6GB Zotac GTX 980 Ti: | |
+| GPU | 16x16 | 64x64 | 256x256 | 1024x1024 | 4096x4096 |
+| --- | --- |--- |--- |--- |--- |
+| NVIDIA 12GB GTX TITAN X: | | | | | |
+| NVIDIA 6GB Zotac GTX 980 Ti: | | | | | |
 
