@@ -1,3 +1,7 @@
+/* Matrix multiplication using shared memory, adapted from:
+ * https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#shared-memory
+ */
+
 #include <stdio.h>
 
 // Matrices are stored in row-major order:
