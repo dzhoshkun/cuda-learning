@@ -52,7 +52,8 @@ int main(int argc, char *argv[])
         oSizeROI.width = n_cols;
         oSizeROI.height = n_rows; // TODO: check row vs. col order!
         NppStatus ret = nppiYUV420ToBGR_8u_P3C3R(pSrc, rSrcStep, pDst, nDstStep, oSizeROI);
-        // TODO: check status
+        if (ret != 0)
+            printf("I420-to-BGR returned %d\n", ret);
     }
 
     // allocate memory for CIELAB data on device
@@ -67,7 +68,8 @@ int main(int argc, char *argv[])
         oSizeROI.width = n_cols;
         oSizeROI.height = n_rows; // TODO: check row vs. col order!
         NppStatus ret = nppiBGRToLab_8u_C3R(pSrc, nSrcStep, pDst, nDstStep, oSizeROI);
-        // TODO: check status
+        if (ret != 0)
+            printf("BGR-to-CIELAB returned %d\n", ret);
     }
 
     // allocate memory for BGR on device
@@ -82,7 +84,8 @@ int main(int argc, char *argv[])
         oSizeROI.width = n_cols;
         oSizeROI.height = n_rows; // TODO: check row vs. col order!
         NppStatus ret = nppiLabToBGR_8u_C3R(pSrc, nSrcStep, pDst, nDstStep, oSizeROI);
-        // TODO: check status
+        if (ret != 0)
+            printf("CIELAB-to-BGR returned %d\n", ret);
     }
 
     // allocate memory for I420 on device
@@ -101,7 +104,8 @@ int main(int argc, char *argv[])
         oSizeROI.width = n_cols;
         oSizeROI.height = n_rows; // TODO: check row vs. col order!
         NppStatus ret = nppiBGRToYUV_8u_C3P3R(pSrc, nSrcStep, pDst, nDstStep, oSizeROI);
-        // TODO: check status
+        if (ret != 0)
+            printf("BGR-to-I420 returned %d\n", ret);
     }
 
     // copy data back to host
