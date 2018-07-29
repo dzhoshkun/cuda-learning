@@ -55,6 +55,7 @@ int main(int argc, char *argv[])
         if (ret != 0)
             printf("I420-to-BGR returned %d\n", ret);
     }
+    cudaFree(d_data);
 
     // allocate memory for CIELAB data on device
     Npp8u *d_data_lab;
@@ -71,6 +72,7 @@ int main(int argc, char *argv[])
         if (ret != 0)
             printf("BGR-to-CIELAB returned %d\n", ret);
     }
+    cudaFree(d_data_bgr);
 
     // allocate memory for BGR on device
     Npp8u *d_proc_data_bgr;
@@ -87,6 +89,7 @@ int main(int argc, char *argv[])
         if (ret != 0)
             printf("CIELAB-to-BGR returned %d\n", ret);
     }
+    cudaFree(d_data_lab);
 
     // allocate memory for I420 on device
     Npp8u *d_proc_data;
@@ -107,6 +110,7 @@ int main(int argc, char *argv[])
         if (ret != 0)
             printf("BGR-to-I420 returned %d\n", ret);
     }
+    cudaFree(d_proc_data_bgr);
 
     // copy data back to host
     cv::Mat proc_img_i420 = cv::Mat::zeros(orig_img_i420.size(), orig_img_i420.type());
@@ -114,11 +118,7 @@ int main(int argc, char *argv[])
     cudaMemcpy(h_data, d_proc_data, count, cudaMemcpyDeviceToHost);
 
     // free device memory
-    cudaFree(d_data_lab);
-    cudaFree(d_data_bgr);
-    cudaFree(d_proc_data_bgr);
     cudaFree(d_proc_data);
-    cudaFree(d_data);
 
     // save processed image
     cv::Mat proc_img;
