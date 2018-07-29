@@ -118,7 +118,7 @@ int main(int argc, char *argv[])
         NppiSize oSizeROI;
         oSizeROI.width = n_cols;
         oSizeROI.height = n_rows; // TODO: check row vs. col order!
-        NppStatus ret = nppiBGRToYUV420_8u_AC4P3R(pSrc, nSrcStep, pDst, rDstStep, oSizeROI);
+        NppStatus ret = nppiBGRToYCrCb420_8u_C3P3R(pSrc, nSrcStep, pDst, rDstStep, oSizeROI);
         if (ret != 0)
             printf("BGR-to-I420 returned %d\n", ret);
         cudaDeviceSynchronize();
