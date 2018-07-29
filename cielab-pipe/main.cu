@@ -16,6 +16,10 @@ int main(int argc, char *argv[])
     cv::Mat orig_img;
     orig_img = cv::imread(argv[1]);
     int n_rows = orig_img.rows, n_cols = orig_img.cols;
+    // assert both dimensions divisible by 4,
+    // needed for I420 memory offset computations
+    assert((int)(n_cols * 0.25) == (n_cols * 0.25));
+    assert((int)(n_rows * 0.25) == (n_rows * 0.25));
 
     // convert image to I420
     cv::Mat orig_img_i420;
