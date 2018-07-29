@@ -85,6 +85,25 @@ int main(int argc, char *argv[])
         // TODO: check status
     }
 
+    // allocate memory for I420 on device
+    Npp8u *d_proc_data;
+    cudaMalloc(&d_proc_data, count * sizeof(Npp8u));
+
+    // convert BGR back to I420
+    {
+        Npp8u *pSrc = d_proc_data_bgr, *pDst[3];
+        pDst[0] = d_proc_data;
+        pDst[1] = &d_proc_data[n_cols * n_rows]; // TODO: is address op used correctly
+        // TODO: assert offset integer
+        pDst[2] = &d_proc_data[(int)(n_cols * n_rows * 1.25)]; // TODO: is address op used correctly
+        int nSrcStep = 3 * n_cols, nDstStep = n_cols; // TODO: why nDstStep scalar?
+        NppiSize oSizeROI;
+        oSizeROI.width = n_cols;
+        oSizeROI.height = n_rows; // TODO: check row vs. col order!
+        NppStatus ret = nppiBGRToYUV_8u_C3P3R(pSrc, nSrcStep, pDst, nDstStep, oSizeROI);
+        // TODO: check status
+    }
+
     // TODO: delete this, testing only
     cv::Mat proc_img_i420;
     proc_img_i420 = orig_img_i420;
@@ -96,6 +115,7 @@ int main(int argc, char *argv[])
     cudaFree(d_data_lab);
     cudaFree(d_data_bgr);
     cudaFree(d_proc_data_bgr);
+    cudaFree(d_proc_data);
     cudaFree(d_data);
 
     // save processed image
