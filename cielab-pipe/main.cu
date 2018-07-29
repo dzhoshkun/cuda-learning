@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 
     // allocate memory for BGR data on device
     Npp8u *d_data_bgr;
-    cudaMalloc(&d_data_bgr, 3 * count * sizeof(Npp8u));
+    cudaMalloc(&d_data_bgr, 3 * n_cols * n_rows * sizeof(Npp8u));
 
     // convert I420 to BGR on device
     {
