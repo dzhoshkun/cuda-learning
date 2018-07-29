@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
 
     // allocate memory for I420 on device
     Npp8u *d_proc_data;
-    cudaMalloc(&d_proc_data, count * sizeof(Npp8u));
+    cudaMalloc(&d_proc_data, count);
 
     // convert BGR back to I420
     {
