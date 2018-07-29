@@ -109,11 +109,16 @@ int main(int argc, char *argv[])
         pDst[1] = &d_proc_data[n_cols * n_rows]; // TODO: is address op used correctly
         // TODO: assert offset integer
         pDst[2] = &d_proc_data[(int)(n_cols * n_rows * 1.25)]; // TODO: is address op used correctly
-        int nSrcStep = 3 * n_cols, nDstStep = n_cols; // TODO: why nDstStep scalar?
+        int nSrcStep = 3 * n_cols, rDstStep[3];
+        rDstStep[0] = n_cols;
+        // TODO: assert offset integer
+        rDstStep[1] = (int)(n_cols * 0.25);
+        // TODO: assert offset integer
+        rDstStep[2] = (int)(n_cols * 0.25);
         NppiSize oSizeROI;
         oSizeROI.width = n_cols;
         oSizeROI.height = n_rows; // TODO: check row vs. col order!
-        NppStatus ret = nppiBGRToYUV_8u_C3P3R(pSrc, nSrcStep, pDst, nDstStep, oSizeROI);
+        NppStatus ret = nppiBGRToYUV420_8u_AC4P3R(pSrc, nSrcStep, pDst, rDstStep, oSizeROI);
         if (ret != 0)
             printf("BGR-to-I420 returned %d\n", ret);
         cudaDeviceSynchronize();
