@@ -124,6 +124,8 @@ int main(int argc, char *argv[])
     // free device memory
     cudaFree(d_proc_data);
 
+    cudaDeviceSynchronize();
+
     // save processed image
     cv::Mat proc_img;
     cv::cvtColor(proc_img_i420, proc_img, cv::COLOR_YUV2BGRA_YV12);
