@@ -70,6 +70,21 @@ int main(int argc, char *argv[])
         // TODO: check status
     }
 
+    // allocate memory for BGR on device
+    Npp8u *d_proc_data_bgr;
+    cudaMalloc(&d_proc_data_bgr, 3 * n_cols * n_rows * sizeof(Npp8u));
+
+    // convert CIELAB back to BGR
+    {
+        Npp8u *pSrc = d_data_lab, *pDst = d_proc_data_bgr;
+        int nSrcStep = 3 * n_cols, nDstStep = 3 * n_cols;
+        NppiSize oSizeROI;
+        oSizeROI.width = n_cols;
+        oSizeROI.height = n_rows; // TODO: check row vs. col order!
+        NppStatus ret = nppiLabToBGR_8u_C3R(pSrc, nSrcStep, pDst, nDstStep, oSizeROI);
+        // TODO: check status
+    }
+
     // TODO: delete this, testing only
     cv::Mat proc_img_i420;
     proc_img_i420 = orig_img_i420;
@@ -80,6 +95,7 @@ int main(int argc, char *argv[])
     // free device memory
     cudaFree(d_data_lab);
     cudaFree(d_data_bgr);
+    cudaFree(d_proc_data_bgr);
     cudaFree(d_data);
 
     // save processed image
