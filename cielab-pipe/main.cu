@@ -51,7 +51,8 @@ int main(int argc, char *argv[])
         NppiSize oSizeROI;
         oSizeROI.width = n_cols;
         oSizeROI.height = n_rows; // TODO: check row vs. col order!
-        nppiYUV420ToBGR_8u_P3C3R(pSrc, rSrcStep, pDst, nDstStep, oSizeROI);
+        NppStatus ret = nppiYUV420ToBGR_8u_P3C3R(pSrc, rSrcStep, pDst, nDstStep, oSizeROI);
+        // TODO: check status
     }
 
     // TODO: delete this, testing only
