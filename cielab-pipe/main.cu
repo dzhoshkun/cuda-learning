@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 
     // convert image to I420
     cv::Mat orig_img_i420;
-    cv::cvtColor(orig_img, orig_img_i420, cv::COLOR_BGRA2YUV_I420);
+    cv::cvtColor(orig_img, orig_img_i420, cv::COLOR_BGRA2YUV_YV12);
 
     // TODO: delete this, testing only
     cv::Mat proc_img_i420;
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 
     // save processed image
     cv::Mat proc_img;
-    cv::cvtColor(proc_img_i420, proc_img, cv::COLOR_YUV420p2BGRA);
+    cv::cvtColor(proc_img_i420, proc_img, cv::COLOR_YUV2BGRA_YV12);
     if (not cv::imwrite("./cielab-pipe-processed.jpg", proc_img))
     {
         printf("Could not write processed image\n");
