@@ -104,12 +104,10 @@ int main(int argc, char *argv[])
         // TODO: check status
     }
 
-    // TODO: delete this, testing only
-    cv::Mat proc_img_i420;
-    proc_img_i420 = orig_img_i420;
-
     // copy data back to host
-    cudaMemcpy(h_data, d_data, count, cudaMemcpyDeviceToHost);
+    cv::Mat proc_img_i420 = cv::Mat::zeros(orig_img_i420.size(), orig_img_i420.type());
+    h_data = proc_img_i420.data;
+    cudaMemcpy(h_data, d_proc_data, count, cudaMemcpyDeviceToHost);
 
     // free device memory
     cudaFree(d_data_lab);
