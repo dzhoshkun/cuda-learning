@@ -7,5 +7,6 @@ if __name__ == '__main__':
     img_orig = skimage.io.imread(filename)
     img_lab = skimage.color.rgb2lab(img_orig)
     d_img_a = cupy.array(img_lab[:, :, 1])
-    print(d_img_a.shape)
+    d_img_a_idx = cupy.argsort(d_img_a)
+    print(d_img_a_idx.shape)
 
