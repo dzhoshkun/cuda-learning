@@ -4,6 +4,7 @@ import pstats
 import skimage.io
 import skimage.color
 import cupy
+import numpy
 
 if __name__ == '__main__':
     pr = cProfile.Profile()
@@ -12,6 +13,7 @@ if __name__ == '__main__':
     img_lab = skimage.color.rgb2lab(img_orig)
     d_img_a = cupy.array(img_lab[:, :, 1])
     pr.enable()
+    img_a_idx = numpy.argsort(img_lab[:, :, 1])
     d_img_a_idx = cupy.argsort(d_img_a)
     pr.disable()
     s = StringIO.StringIO()
