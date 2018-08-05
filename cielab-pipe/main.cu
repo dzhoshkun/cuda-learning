@@ -44,13 +44,10 @@ int main(int argc, char *argv[])
         Npp8u *pSrc[3], *pDst = d_data_bgr;
         pSrc[0] = (Npp8u *) d_data;
         pSrc[1] = (Npp8u *) &d_data[n_rows * n_cols]; // TODO: is address op used correctly
-        // TODO: assert offset integer
         pSrc[2] = (Npp8u *) &d_data[(int)(n_rows * n_cols * 1.25)]; // TODO: is address op used correctly
         int rSrcStep[3], nDstStep = 3 * n_cols;
         rSrcStep[0] = n_cols;
-        // TODO: assert offset integer
         rSrcStep[1] = (int)(n_cols * 0.25);
-        // TODO: assert offset integer
         rSrcStep[2] = (int)(n_cols * 0.25);
         NppiSize oSizeROI;
         oSizeROI.width = n_cols;
@@ -107,13 +104,10 @@ int main(int argc, char *argv[])
         Npp8u *pSrc = d_proc_data_bgr, *pDst[3];
         pDst[0] = d_proc_data;
         pDst[1] = &d_proc_data[n_cols * n_rows]; // TODO: is address op used correctly
-        // TODO: assert offset integer
         pDst[2] = &d_proc_data[(int)(n_cols * n_rows * 1.25)]; // TODO: is address op used correctly
         int nSrcStep = 3 * n_cols, rDstStep[3];
         rDstStep[0] = n_cols;
-        // TODO: assert offset integer
         rDstStep[1] = (int)(n_cols * 0.25);
-        // TODO: assert offset integer
         rDstStep[2] = (int)(n_cols * 0.25);
         NppiSize oSizeROI;
         oSizeROI.width = n_cols;
