@@ -1,4 +1,5 @@
 *.user
 build
 *.swp
+cielab-pipe-processed.jpg
 
