@@ -47,8 +47,8 @@ int main(int argc, char *argv[])
         pSrc[2] = (Npp8u *) &d_data[(int)(n_rows * n_cols * 1.25)];
         int rSrcStep[3], nDstStep = 3 * n_cols;
         rSrcStep[0] = n_cols;
-        rSrcStep[1] = (int)(n_cols * 0.25);
-        rSrcStep[2] = (int)(n_cols * 0.25);
+        rSrcStep[1] = (int)(n_cols * 0.5);
+        rSrcStep[2] = (int)(n_cols * 0.5);
         NppiSize oSizeROI;
         oSizeROI.width = n_cols;
         oSizeROI.height = n_rows;
@@ -107,8 +107,8 @@ int main(int argc, char *argv[])
         pDst[2] = &d_proc_data[(int)(n_cols * n_rows * 1.25)];
         int nSrcStep = 3 * n_cols, rDstStep[3];
         rDstStep[0] = n_cols;
-        rDstStep[1] = (int)(n_cols * 0.25);
-        rDstStep[2] = (int)(n_cols * 0.25);
+        rDstStep[1] = (int)(n_cols * 0.5);
+        rDstStep[2] = (int)(n_cols * 0.5);
         NppiSize oSizeROI;
         oSizeROI.width = n_cols;
         oSizeROI.height = n_rows;
