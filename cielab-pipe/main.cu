@@ -55,7 +55,6 @@ int main(int argc, char *argv[])
         NppStatus ret = nppiYCbCr420ToBGR_8u_P3C3R(pSrc, rSrcStep, pDst, nDstStep, oSizeROI);
         if (ret != 0)
             printf("I420-to-BGR returned %d\n", ret);
-        cudaDeviceSynchronize();
     }
     cudaFree(d_data);
 
@@ -73,7 +72,6 @@ int main(int argc, char *argv[])
         NppStatus ret = nppiBGRToLab_8u_C3R(pSrc, nSrcStep, pDst, nDstStep, oSizeROI);
         if (ret != 0)
             printf("BGR-to-CIELAB returned %d\n", ret);
-        cudaDeviceSynchronize();
     }
     cudaFree(d_data_bgr);
 
@@ -91,7 +89,6 @@ int main(int argc, char *argv[])
         NppStatus ret = nppiLabToBGR_8u_C3R(pSrc, nSrcStep, pDst, nDstStep, oSizeROI);
         if (ret != 0)
             printf("CIELAB-to-BGR returned %d\n", ret);
-        cudaDeviceSynchronize();
     }
     cudaFree(d_data_lab);
 
@@ -115,7 +112,6 @@ int main(int argc, char *argv[])
         NppStatus ret = nppiBGRToYCbCr420_8u_C3P3R(pSrc, nSrcStep, pDst, rDstStep, oSizeROI);
         if (ret != 0)
             printf("BGR-to-I420 returned %d\n", ret);
-        cudaDeviceSynchronize();
     }
     cudaFree(d_proc_data_bgr);
 
