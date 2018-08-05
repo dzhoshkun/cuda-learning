@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
 
     // save processed image
     cv::Mat proc_img;
-    cv::cvtColor(proc_img_i420, proc_img, cv::COLOR_YUV2BGRA_YV12);
+    cv::cvtColor(proc_img_i420, proc_img, cv::COLOR_YUV420p2BGR);
     if (not cv::imwrite("./cielab-pipe-processed.jpg", proc_img))
     {
         printf("Could not write processed image\n");
