@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
         rSrcStep[2] = (int)(n_cols * 0.25);
         NppiSize oSizeROI;
         oSizeROI.width = n_cols;
-        oSizeROI.height = n_rows; // TODO: check row vs. col order!
+        oSizeROI.height = n_rows;
         NppStatus ret = nppiYUV420ToBGR_8u_P3C3R(pSrc, rSrcStep, pDst, nDstStep, oSizeROI);
         if (ret != 0)
             printf("I420-to-BGR returned %d\n", ret);
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
         int nSrcStep = 3 * n_cols, nDstStep = 3 * n_cols;
         NppiSize oSizeROI;
         oSizeROI.width = n_cols;
-        oSizeROI.height = n_rows; // TODO: check row vs. col order!
+        oSizeROI.height = n_rows;
         NppStatus ret = nppiBGRToLab_8u_C3R(pSrc, nSrcStep, pDst, nDstStep, oSizeROI);
         if (ret != 0)
             printf("BGR-to-CIELAB returned %d\n", ret);
@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
         int nSrcStep = 3 * n_cols, nDstStep = 3 * n_cols;
         NppiSize oSizeROI;
         oSizeROI.width = n_cols;
-        oSizeROI.height = n_rows; // TODO: check row vs. col order!
+        oSizeROI.height = n_rows;
         NppStatus ret = nppiLabToBGR_8u_C3R(pSrc, nSrcStep, pDst, nDstStep, oSizeROI);
         if (ret != 0)
             printf("CIELAB-to-BGR returned %d\n", ret);
@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
         rDstStep[2] = (int)(n_cols * 0.25);
         NppiSize oSizeROI;
         oSizeROI.width = n_cols;
-        oSizeROI.height = n_rows; // TODO: check row vs. col order!
+        oSizeROI.height = n_rows;
         NppStatus ret = nppiBGRToYCrCb420_8u_C3P3R(pSrc, nSrcStep, pDst, rDstStep, oSizeROI);
         if (ret != 0)
             printf("BGR-to-I420 returned %d\n", ret);
