@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
         NppiSize oSizeROI;
         oSizeROI.width = n_cols;
         oSizeROI.height = n_rows;
-        NppStatus ret = nppiYUV420ToBGR_8u_P3C3R(pSrc, rSrcStep, pDst, nDstStep, oSizeROI);
+        NppStatus ret = nppiYCbCr420ToBGR_8u_P3C3R(pSrc, rSrcStep, pDst, nDstStep, oSizeROI);
         if (ret != 0)
             printf("I420-to-BGR returned %d\n", ret);
         cudaDeviceSynchronize();
